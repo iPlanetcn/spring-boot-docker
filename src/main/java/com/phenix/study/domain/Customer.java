@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
+ * Customer Entity
+ *
  * @author john
  * @since 2017-06-09
  */
