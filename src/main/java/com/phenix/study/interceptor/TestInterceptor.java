@@ -19,7 +19,7 @@ public class TestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        log.info("preHandle");
+        log.info("preHandle()->1");
         return true;
     }
 
@@ -28,13 +28,13 @@ public class TestInterceptor implements HandlerInterceptor {
                            HttpServletResponse response,
                            Object handler,
                            ModelAndView modelAndView) throws Exception {
-        log.info("postHandle()");
+        log.info("postHandle()->2");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request,
                                 HttpServletResponse response,
                                 Object handler, Exception ex) throws Exception {
-        log.info("afterHandle()");
+        log.info("afterHandle()->3");
     }
 }

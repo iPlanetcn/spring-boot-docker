@@ -3,17 +3,23 @@ package com.phenix.study.controller;
 import com.phenix.study.domain.Customer;
 import com.phenix.study.dto.Resp;
 import com.phenix.study.dto.RespData;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.log4j.Log4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Api(value = "/customer", tags = "Customer", description = "operations about customer")
 @RestController
 @Log4j
 @RequestMapping("/customer")
 public class CustomerController extends BaseController {
 
+    @ApiOperation(value = "search customer", notes = "input keyword then return the customer")
+    @ApiParam(value = "keyword", name="query")
     @GetMapping("/search")
     public Resp findCustomer(@RequestParam(value = "keyword", defaultValue = "john") String keyword) {
 
