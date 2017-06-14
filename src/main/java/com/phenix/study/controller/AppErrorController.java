@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
+/**
+ * AppErrorController
+ *
+ * @author john
+ * @since 2017-06-14
+ */
 @ApiIgnore
 @RestController
 public class AppErrorController implements ErrorController {
@@ -37,8 +43,8 @@ public class AppErrorController implements ErrorController {
         return PATH;
     }
 
-    private Map<String,Object> getErrorAttributes(HttpServletRequest request){
+    private Map<String, Object> getErrorAttributes(HttpServletRequest request) {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-        return errorAttributes.getErrorAttributes(requestAttributes,false);
+        return errorAttributes.getErrorAttributes(requestAttributes, false);
     }
 }

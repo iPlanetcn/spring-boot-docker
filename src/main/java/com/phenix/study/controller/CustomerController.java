@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CustomerController
+ *
+ * @author john
+ * @since 2017-06-14
+ */
 @Api(value = "/customer", tags = "Customer", description = "operations about customer")
 @RestController
 @Log4j
@@ -19,7 +25,7 @@ import java.util.List;
 public class CustomerController extends BaseController {
 
     @ApiOperation(value = "search customer", notes = "input keyword then return the customer")
-    @ApiParam(value = "keyword", name="query")
+    @ApiParam(value = "keyword", name = "query")
     @GetMapping("/search")
     public Resp findCustomer(@RequestParam(value = "keyword", defaultValue = "john") String keyword) {
 
@@ -45,7 +51,7 @@ public class CustomerController extends BaseController {
     public Resp add(@RequestBody Customer customer) {
         log.info(customer.toString());
         if (customer.toString()
-                    .contains("=null,")) {
+                .contains("=null,")) {
             return new Resp(-1, "input json error");
         }
 

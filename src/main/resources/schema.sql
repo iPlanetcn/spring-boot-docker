@@ -1,3 +1,4 @@
+#customer
 CREATE TABLE IF NOT EXISTS `customer` (
   id         INTEGER PRIMARY KEY AUTO_INCREMENT,
   first_name VARCHAR(64) NOT NULL,

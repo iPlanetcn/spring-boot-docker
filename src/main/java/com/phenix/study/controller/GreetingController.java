@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * GreetingController.
+ * GreetingController
  *
  * @author john
- * @since 2017-06-09
+ * @since 2017-06-14
  */
 @RestController
 public class GreetingController {
