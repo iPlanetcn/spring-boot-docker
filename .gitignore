@@ -23,3 +23,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+src/main/java/com/phenix/study/exception/
+src/main/resources/templates/
+src/test/resources/
+classes/

@@ -1,6 +1,8 @@
 package com.phenix.study.service;
 
+import com.phenix.study.dao.CustomerRepository;
 import com.phenix.study.domain.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,39 +10,44 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
-public class CustomerServiceImpl extends BaseService
-        implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
+    private final CustomerRepository customerRepository;
+
+    @Autowired
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public List<Customer> findCustomers(String lastName) {
-        return getCustomerRepository().findByLastName(lastName);
+        return customerRepository.findByLastName(lastName);
     }
 
     @Override
     public List<Customer> findAll() {
-        return StreamSupport.stream(getCustomerRepository().findAll()
+        return StreamSupport.stream(customerRepository.findAll()
                                                            .spliterator(), true)
                             .collect(Collectors.toList());
     }
 
     @Override
     public Customer find(Long id) {
-        return getCustomerRepository().findOne(id);
+        return customerRepository.findOne(id);
     }
 
     @Override
     public Customer add(Customer customer) {
-        return getCustomerRepository().save(customer);
+        return customerRepository.save(customer);
     }
 
     @Override
     public Boolean delete(Long id) {
-        getCustomerRepository().delete(id);
+        customerRepository.delete(id);
         return !exists(id);
     }
 
     @Override
     public Boolean exists(Long id) {
-        return getCustomerRepository().exists(id);
+        return customerRepository.exists(id);
     }
 }

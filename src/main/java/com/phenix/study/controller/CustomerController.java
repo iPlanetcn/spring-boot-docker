@@ -3,10 +3,12 @@ package com.phenix.study.controller;
 import com.phenix.study.domain.Customer;
 import com.phenix.study.dto.Resp;
 import com.phenix.study.dto.RespData;
+import com.phenix.study.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,14 +24,20 @@ import java.util.List;
 @RestController
 @Log4j
 @RequestMapping("/customer")
-public class CustomerController extends BaseController {
+public class CustomerController{
+    private final CustomerService customerService;
+
+    @Autowired
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @ApiOperation(value = "search customer", notes = "input keyword then return the customer")
     @ApiParam(value = "keyword", name = "query")
     @GetMapping("/search")
     public Resp findCustomer(@RequestParam(value = "keyword", defaultValue = "john") String keyword) {
 
-        List<Customer> result = getCustomerService().findCustomers(keyword);
+        List<Customer> result = customerService.findCustomers(keyword);
         if (result.size() == 0) {
             return new Resp(0, "found none");
         } else {
@@ -39,12 +47,12 @@ public class CustomerController extends BaseController {
 
     @GetMapping("/all")
     public Resp findAll() {
-        return new RespData<>(0, "success", getCustomerService().findAll());
+        return new RespData<>(0, "success", customerService.findAll());
     }
 
     @GetMapping("/{id}")
     public Resp findById(@PathVariable Long id) {
-        return new RespData<>(0, "success", getCustomerService().find(id));
+        return new RespData<>(0, "success", customerService.find(id));
     }
 
     @PutMapping("/add")
@@ -55,7 +63,7 @@ public class CustomerController extends BaseController {
             return new Resp(-1, "input json error");
         }
 
-        Customer result = getCustomerService().add(customer);
+        Customer result = customerService.add(customer);
         if (result == null) {
             return new Resp(-1, "add failure");
         }
@@ -64,10 +72,10 @@ public class CustomerController extends BaseController {
 
     @DeleteMapping("/{id}")
     public Resp delete(@PathVariable Long id) {
-        if (!getCustomerService().exists(id)) {
+        if (!customerService.exists(id)) {
             return new Resp(-1, "id not exists");
         }
-        Boolean result = getCustomerService().delete(id);
+        Boolean result = customerService.delete(id);
         if (result) {
             return new Resp(0, "success");
         } else {

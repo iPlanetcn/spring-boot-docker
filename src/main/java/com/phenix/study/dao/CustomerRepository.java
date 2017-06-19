@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 /**
+ * Customer dao: contains CRUD actions.
+ *
  * @author john
  * @since 2017-06-09
  */

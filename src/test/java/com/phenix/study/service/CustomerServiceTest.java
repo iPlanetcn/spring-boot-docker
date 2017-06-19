@@ -1,6 +1,7 @@
 package com.phenix.study.service;
 
 import com.phenix.study.domain.Customer;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,15 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomerServiceTest {
-
     @Autowired
     private CustomerService customerService;
+
+    @After
+    public void tearDown() throws Exception {
+        customerService.findCustomers("Wallance").forEach(customer -> {
+            customerService.delete(customer.getId());
+        });
+    }
 
     @Test
     public void findCustomers() throws Exception {

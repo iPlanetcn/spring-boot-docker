@@ -20,7 +20,7 @@ public class SpringBootDockerApplication {
     }
 
     /**
-     * enable cors for all
+     * enable CORS(Cross-Origin Resource Sharing) for all
      */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
