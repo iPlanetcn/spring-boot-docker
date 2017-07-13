@@ -3,9 +3,6 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./gradlew build
-  - ./gradlew check
-  - ./gradlew test
   - ./gradlew jar
 deploy:
   provider: releases

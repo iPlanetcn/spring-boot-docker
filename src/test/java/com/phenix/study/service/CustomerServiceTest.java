@@ -1,38 +1,46 @@
 package com.phenix.study.service;
 
+import com.google.common.collect.Lists;
+import com.phenix.study.dao.CustomerRepository;
 import com.phenix.study.domain.Customer;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomerServiceTest {
     @Autowired
     private CustomerService customerService;
+    @MockBean
+    private CustomerRepository customerRepository;
+
+    private Customer anotherCustomer;
+    private Customer customerFirst;
 
     @Before
     public void setup() throws Exception {
-        clearAll();
-        customerService.add(new Customer(1L,"John","Lee"));
-        customerService.add(new Customer(2L,"John","Phoenix"));
-    }
+        customerFirst = new Customer(1L, "John", "Lee");
+        Customer customerSecond = new Customer(2L, "John", "Phoenix");
+        anotherCustomer = new Customer("William", "Wallace");
 
-    @After
-    public void tearDown() throws Exception {
-        clearAll();
-    }
-
-    public void clearAll(){
-        customerService.findAll().forEach(customer -> customerService.delete(customer.getId()));
+        given(customerRepository.findByLastName("Lee"))
+                .willReturn(Lists.newArrayList(customerFirst));
+        given(customerRepository.findAll())
+                .willReturn(Lists.newArrayList(customerFirst, customerSecond));
+        given(customerRepository.save(anotherCustomer))
+                .willReturn(anotherCustomer);
+        given(customerRepository.findOne(1L))
+                .willReturn(customerFirst);
     }
 
     @Test
@@ -49,15 +57,13 @@ public class CustomerServiceTest {
 
     @Test
     public void find() throws Exception {
-        List<Customer> customerList = customerService.findCustomers("Lee");
-        Customer customer = customerService.find(customerList.get(0).getId());
-        assertEquals("John", customer.getFirstName());
+        Customer customer = customerService.find(customerFirst.getId());
+        assertEquals(customerFirst.getFirstName(), customer.getFirstName());
     }
 
     @Test
     public void add() throws Exception {
-        Customer customer = new Customer(null, "William", "Wallace");
-        assertEquals(customer.getFirstName(), customerService.add(customer)
+        assertEquals(anotherCustomer.getFirstName(), customerService.add(anotherCustomer)
                                                              .getFirstName());
     }
 

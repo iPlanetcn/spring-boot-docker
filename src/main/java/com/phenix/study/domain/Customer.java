@@ -14,17 +14,20 @@ import java.io.Serializable;
  * @author john
  * @since 2017-06-09
  */
-@Entity
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+@RequiredArgsConstructor
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NonNull
     private String firstName;
+    @NonNull
     private String lastName;
 }

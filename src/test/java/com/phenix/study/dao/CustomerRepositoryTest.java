@@ -6,40 +6,39 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = NONE)
 public class CustomerRepositoryTest {
     @Autowired
     private CustomerRepository customerRepository;
-    private Customer customer;
 
-    public CustomerRepositoryTest() {
-        customer = new Customer(0L, "John", "Lee");
-    }
+    @Autowired
+    private TestEntityManager entityManager;
 
     @Before
     public void setUp() throws Exception {
-        customerRepository.findAll().forEach(c ->
-                customerRepository.delete(c)
-        );
-        customerRepository.save(customer);
+        entityManager.persist(new Customer("John", "Lee"));
     }
 
     @After
     public void tearDown() throws Exception {
-        customerRepository.findAll().forEach(c ->
-                customerRepository.delete(c)
-        );
+        entityManager.clear();
     }
 
     @Test
     public void testFindByLastName() throws Exception {
-        assertEquals(1, customerRepository.findByLastName("Lee")
-                .size());
+        List<Customer> customerList = customerRepository.findByLastName("Lee");
+        assertEquals(1,customerList.size());
     }
 }
