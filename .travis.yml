@@ -13,4 +13,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-  repo: iPlanetcn/spring-boot-docker
+  repo: iplanetcn/spring-boot-docker
