@@ -28,6 +28,7 @@ public class CustomerRepositoryTest {
 
     @Before
     public void setUp() throws Exception {
+        customerRepository.deleteAll();
         entityManager.persist(new Customer("John", "Lee"));
     }
 
