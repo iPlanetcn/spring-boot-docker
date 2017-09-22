@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> findAll() {
         return StreamSupport.stream(customerRepository.findAll()
-                                                           .spliterator(), true)
+                                                      .spliterator(), true)
                             .collect(Collectors.toList());
     }
 
