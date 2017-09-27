@@ -31,8 +31,7 @@ public class CustomerControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        given(customerService.find(1L))
-                .willReturn(new Customer("John","Lee"));
+        given(customerService.find(1L)).willReturn(new Customer("John", "Lee"));
     }
 
     @Test

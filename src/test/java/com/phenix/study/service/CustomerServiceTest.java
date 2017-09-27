@@ -29,8 +29,10 @@ public class CustomerServiceTest {
 
     @Before
     public void setup() throws Exception {
-        customerFirst = new Customer(1L, "John", "Lee");
-        Customer customerSecond = new Customer(2L, "John", "Phoenix");
+        customerFirst = new Customer("John", "Lee");
+        customerFirst.setId(1L);
+        Customer customerSecond = new Customer("John", "Phoenix");
+        customerSecond.setId(2L);
         anotherCustomer = new Customer("William", "Wallace");
 
         given(customerRepository.findByLastName("Lee"))

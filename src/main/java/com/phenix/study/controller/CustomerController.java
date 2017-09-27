@@ -7,12 +7,12 @@ import com.phenix.study.service.CustomerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * CustomerController
@@ -22,10 +22,11 @@ import java.util.List;
  */
 @Api(value = "/customer", tags = "Customer", description = "operations about customer")
 @RestController
-@Log4j
 @RequestMapping("/customer")
-public class CustomerController{
+public class CustomerController {
     private final CustomerService customerService;
+    private Logger log = Logger.getLogger(CustomerController.this.getClass()
+                                                                 .getSimpleName());
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -59,7 +60,7 @@ public class CustomerController{
     public Resp add(@RequestBody Customer customer) {
         log.info(customer.toString());
         if (customer.toString()
-                .contains("=null,")) {
+                    .contains("=null,")) {
             return new Resp(-1, "input json error");
         }
 

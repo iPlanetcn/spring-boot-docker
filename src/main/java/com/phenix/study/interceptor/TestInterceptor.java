@@ -1,11 +1,11 @@
 package com.phenix.study.interceptor;
 
-import lombok.extern.log4j.Log4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.logging.Logger;
 
 /**
  * Custom interceptor
@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author john
  * @since 2017-06-12
  */
-@Log4j
 public class TestInterceptor implements HandlerInterceptor {
+    private Logger log = Logger.getLogger(TestInterceptor.this.getClass()
+                                                              .getSimpleName());
+
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
