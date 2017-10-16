@@ -1,6 +1,11 @@
 package com.phenix.study.dto;
 
-
+/**
+ * Response entity with T
+ *
+ * @author john
+ * @since 2017-10-16
+ */
 public class RespData<T> extends Resp {
     private T data;
 

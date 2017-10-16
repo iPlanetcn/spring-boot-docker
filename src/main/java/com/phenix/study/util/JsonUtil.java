@@ -12,12 +12,17 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
 
-@SuppressWarnings("ALL")
+/**
+ * Json utils: read json from file
+ *
+ * @author john
+ * @since 2017-10-16
+ */
 public class JsonUtil {
     private static final String CUSTOMER = "static/customer.json";
     private static final String CUSTOMERS = "static/customer_list.json";
 
-    public static Customer loadCustomer() {
+    static Customer loadCustomer() {
         return new Gson().fromJson(getJson(CUSTOMER), Customer.class);
     }
 

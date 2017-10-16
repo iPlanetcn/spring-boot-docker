@@ -1,5 +1,11 @@
 package com.phenix.study.bean;
 
+/**
+ * Greeting
+ *
+ * @author john
+ * @since 2017-10-16
+ */
 public class Greeting {
     private final long id;
     private final String content;

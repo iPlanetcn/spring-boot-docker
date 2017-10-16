@@ -12,5 +12,11 @@ import java.util.List;
  * @since 2017-06-09
  */
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
+    /**
+     * find customer by the last name
+     *
+     * @param lastName last name of customer
+     * @return Customer List
+     */
     List<Customer> findByLastName(String lastName);
 }

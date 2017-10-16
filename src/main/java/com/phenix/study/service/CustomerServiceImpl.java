@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+/**
+ * Customer service implement
+ *
+ * @author john
+ * @since 2017-10-16
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;

@@ -1,10 +1,16 @@
 package com.phenix.study.dto;
 
+/**
+ * Response Entity
+ *
+ * @author john
+ * @since 2017-10-16
+ */
 public class Resp {
     private Integer code;
     private String message;
 
-    public Resp() {
+    Resp() {
     }
 
     public Resp(Integer code, String message) {

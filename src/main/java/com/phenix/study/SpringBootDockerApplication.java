@@ -8,13 +8,20 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * Application
+ *
+ * @author john
+ * @since 2017-10-16
+ */
 @SpringBootApplication
 public class SpringBootDockerApplication {
     public static void main(String[] args) {
-        ApplicationContext ctx  = SpringApplication.run(SpringBootDockerApplication.class, args);
-        String[] activeProfiles = ctx.getEnvironment().getActiveProfiles();
+        ApplicationContext ctx = SpringApplication.run(SpringBootDockerApplication.class, args);
+        String[] activeProfiles = ctx.getEnvironment()
+                                     .getActiveProfiles();
 
-        for (String profile:activeProfiles) {
+        for (String profile : activeProfiles) {
             System.out.println("active profile: " + profile);
         }
     }
