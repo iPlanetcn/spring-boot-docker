@@ -32,13 +32,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> findAll() {
         return StreamSupport.stream(customerRepository.findAll()
-                                                      .spliterator(), true)
-                            .collect(Collectors.toList());
+                .spliterator(), true)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Customer find(Long id) {
-        return customerRepository.findOne(id);
+        return customerRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -48,12 +48,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Boolean delete(Long id) {
-        customerRepository.delete(id);
+        customerRepository.deleteById(id);
         return !exists(id);
     }
 
     @Override
     public Boolean exists(Long id) {
-        return customerRepository.exists(id);
+        return customerRepository.existsById(id);
     }
 }

@@ -1,17 +1,15 @@
 package com.phenix.study.controller;
 
-import com.phenix.study.dto.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
-import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -22,29 +20,25 @@ import java.util.Map;
  */
 @ApiIgnore
 @RestController
-public class AppErrorController implements ErrorController {
+public class AppErrorController extends AbstractErrorController {
     private static final String PATH = "/error";
 
-    private final ErrorAttributes errorAttributes;
 
     @Autowired
     public AppErrorController(ErrorAttributes errorAttributes) {
-        this.errorAttributes = errorAttributes;
+        super(errorAttributes);
     }
 
-    @RequestMapping(value = PATH)
-    Resp error(HttpServletRequest request, HttpServletResponse response) {
-        return new Resp(response.getStatus(), getErrorAttributes(request).get("error").toString());
+
+    @RequestMapping(value = PATH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Map<String, Object> handleError(HttpServletRequest request) {
+        return super.getErrorAttributes(request, true);
     }
 
 
     @Override
     public String getErrorPath() {
         return PATH;
-    }
-
-    private Map<String, Object> getErrorAttributes(HttpServletRequest request) {
-        RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-        return errorAttributes.getErrorAttributes(requestAttributes, false);
     }
 }
