@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
@@ -41,8 +42,8 @@ public class CustomerServiceTest {
                 .willReturn(Lists.newArrayList(customerFirst, customerSecond));
         given(customerRepository.save(anotherCustomer))
                 .willReturn(anotherCustomer);
-        given(customerRepository.findOne(1L))
-                .willReturn(customerFirst);
+        given(customerRepository.findById(1L))
+                .willReturn(Optional.of(customerFirst));
     }
 
     @Test

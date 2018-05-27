@@ -1,5 +1,7 @@
 #customer
-USE 'db_dev';
+CREATE DATABASE IF NOT EXISTS `db_dev`;
+
+USE `db_dev`;
 
 CREATE TABLE IF NOT EXISTS `customer` (
   id         INTEGER PRIMARY KEY AUTO_INCREMENT,

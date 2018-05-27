@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * LicenseCotroller
+ * LicenseController
  *
  * @author john
  * @since 2017-10-18

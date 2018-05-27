@@ -3,18 +3,32 @@ version: '3'
 services:
   mysql:
     image: mysql:5.7
-    hostname: webapp_mysql
+#    container_name: boot-mysql
+    hostname: mysql
     environment:
-      MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db_dev
+    ports:
+      - "3306:3306"
+
+#  webapp:
+#    image: java:8
+#    container_name: boot-app
+#    links:
+#      - mysql:webapp_mysql
+#    volumes:
+#      - ./build/libs/spring-boot-docker.jar:/app/app.jar
+#    ports:
+#      - "80:80"
+#    command: "java -jar /app/app.jar --spring.profiles.active=dev"
 
   webapp:
-    image: java:8
+    depends_on:
+      - mysql
+    command: ["./wait-for"]
+    image: phenix/spring-boot-docker
+#    container_name: boot-service
     links:
-      - mysql:webapp_mysql
-    volumes:
-      - /root/temp/jar/spring-boot-docker-0.1.0.jar:/app/app.jar
+      - mysql:mysql
     ports:
-      - "80:80"
-    command: "java -jar /app/app.jar --spring.profiles.active=dev"
+      - "80:8080"

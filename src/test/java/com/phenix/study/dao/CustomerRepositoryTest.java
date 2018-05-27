@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
 import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 @RunWith(SpringRunner.class)
@@ -29,7 +29,7 @@ public class CustomerRepositoryTest {
     @Before
     public void setUp() throws Exception {
         customerRepository.deleteAll();
-        entityManager.persist(new Customer("John", "Lee"));
+        entityManager.persistAndFlush(new Customer("John", "Lee"));
     }
 
     @After
