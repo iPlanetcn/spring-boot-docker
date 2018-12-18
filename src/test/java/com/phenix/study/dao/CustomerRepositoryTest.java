@@ -27,18 +27,18 @@ public class CustomerRepositoryTest {
     private TestEntityManager entityManager;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         customerRepository.deleteAll();
         entityManager.persistAndFlush(new Customer("John", "Lee"));
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         entityManager.clear();
     }
 
     @Test
-    public void testFindByLastName() throws Exception {
+    public void testFindByLastName() {
         List<Customer> customerList = customerRepository.findByLastName("Lee");
         assertEquals(1,customerList.size());
     }

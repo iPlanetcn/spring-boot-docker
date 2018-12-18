@@ -30,12 +30,12 @@ public class CustomerControllerTest {
     private CustomerService customerService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         given(customerService.find(1L)).willReturn(new Customer("John", "Lee"));
     }
 
     @Test
-    public void findById() throws Exception {
+    public void findById() throws Exception{
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(this.customerController)
                                          .build();
 

@@ -29,7 +29,7 @@ public class CustomerServiceTest {
     private Customer customerFirst;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         customerFirst = new Customer("John", "Lee");
         customerFirst.setId(1L);
         Customer customerSecond = new Customer("John", "Phoenix");
@@ -47,25 +47,25 @@ public class CustomerServiceTest {
     }
 
     @Test
-    public void findCustomers() throws Exception {
+    public void findCustomers() {
         List<Customer> customerList = customerService.findCustomers("Lee");
         assertEquals(1, customerList.size());
     }
 
     @Test
-    public void findAll() throws Exception {
+    public void findAll() {
         List<Customer> customerList = customerService.findAll();
         assertEquals(2, customerList.size());
     }
 
     @Test
-    public void find() throws Exception {
+    public void find() {
         Customer customer = customerService.find(customerFirst.getId());
         assertEquals(customerFirst.getFirstName(), customer.getFirstName());
     }
 
     @Test
-    public void add() throws Exception {
+    public void add() {
         assertEquals(anotherCustomer.getFirstName(), customerService.add(anotherCustomer)
                                                              .getFirstName());
     }

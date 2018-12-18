@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="container">
-    Welcome ${name}!!
+    Welcome ${message}!!
 </div>
 </body>
 </html>

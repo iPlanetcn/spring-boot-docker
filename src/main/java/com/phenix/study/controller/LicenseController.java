@@ -3,6 +3,7 @@ package com.phenix.study.controller;
 import com.phenix.study.util.LicenseUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author john
  * @since 2017-10-18
  */
+@ApiIgnore
 @RestController
 @RequestMapping("/rpc")
 public class LicenseController {

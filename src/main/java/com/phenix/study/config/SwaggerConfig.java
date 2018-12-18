@@ -1,5 +1,6 @@
 package com.phenix.study.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,6 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * swagger config
  *
+ * json: http://localhost:8080/v2/api-docs
+ * doc: http://localhost:8080/swagger-ui.html
+ *
  * @author john
  * @since 2017-10-16
  */
@@ -21,6 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Profile("dev")
 public class SwaggerConfig {
+    @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
                                                       .select()

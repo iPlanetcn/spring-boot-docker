@@ -18,7 +18,7 @@ public class WelcomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showMessage(ModelMap model) {
-        model.put("name", " spring-boot-docker");
+        model.put("message", " to spring boot docker!");
         return "welcome";
     }
 }
