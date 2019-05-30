@@ -66,8 +66,7 @@ public class CustomerServiceTest {
 
     @Test
     public void add() {
-        assertEquals(anotherCustomer.getFirstName(), customerService.add(anotherCustomer)
-                                                             .getFirstName());
+        assertEquals(anotherCustomer.getFirstName(), customerService.add(anotherCustomer).getFirstName());
     }
 
 }

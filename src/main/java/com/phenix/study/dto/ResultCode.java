@@ -22,7 +22,7 @@ public enum ResultCode {
     /** 参数验证错误. ErrorCode : 040001 */
     PARAM_EXCEPTION("040001", "参数验证错误"),
 
-    /** 系统正在维护. ErrorCode : 040001 */
+    /** 系统正在维护. ErrorCode : 11 */
     SYSTEM_MAINTAIN_EXCEPTION("11", "系统正在维护");
 
     private String code;
