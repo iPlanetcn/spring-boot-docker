@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -27,8 +28,7 @@ public class JsonUtil {
     }
 
     public static List<Customer> loadCustomerList() {
-        Type type = new TypeToken<List<Customer>>() {
-        }.getType();
+        Type type = new TypeToken<List<Customer>>() {}.getType();
         return new Gson().fromJson(getJson(CUSTOMERS), type);
     }
 
@@ -42,7 +42,7 @@ public class JsonUtil {
             //noinspection ResultOfMethodCallIgnored
             is.read(buffer);
             is.close();
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             ex.printStackTrace();
             return null;
